@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for Agrikonnect */
+@layer base {
+  html {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-black px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors;
+  }
+}
