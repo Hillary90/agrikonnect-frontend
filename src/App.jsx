@@ -4,6 +4,9 @@ import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import { LoginPage, RegisterPage } from './pages/auth';
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import CommunitiesPage from './pages/CommunitiesPage';
+import ExpertsPage from './pages/ExpertsPage';
+import FeedPage from './pages/posts/FeedPage';
 
 // Layout component for pages with header
 const Layout = ({ children }) => (
@@ -25,10 +28,7 @@ const HomeLayout = ({ children }) => (
   </>
 );
 
-// Placeholder components for protected routes
-const Posts = () => <div className="p-8">Posts Page - Coming Soon</div>;
-const Communities = () => <div className="p-8">Communities Page - Coming Soon</div>;
-const Experts = () => <div className="p-8">Experts Page - Coming Soon</div>;
+// Placeholder components for routes not yet implemented
 const Messages = () => <div className="p-8">Messages Page - Coming Soon</div>;
 const Profile = () => <div className="p-8">Profile Page - Coming Soon</div>;
 const Notifications = () => <div className="p-8">Notifications Page - Coming Soon</div>;
@@ -39,9 +39,9 @@ function App() {
       <Route path="/" element={<HomeLayout><HomePage /></HomeLayout>} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/posts" element={<ProtectedRoute><Layout><Posts /></Layout></ProtectedRoute>} />
-      <Route path="/communities" element={<ProtectedRoute><Layout><Communities /></Layout></ProtectedRoute>} />
-      <Route path="/experts" element={<ProtectedRoute><Layout><Experts /></Layout></ProtectedRoute>} />
+      <Route path="/posts" element={<ProtectedRoute><Layout><FeedPage /></Layout></ProtectedRoute>} />
+      <Route path="/communities" element={<ProtectedRoute><Layout><CommunitiesPage /></Layout></ProtectedRoute>} />
+      <Route path="/experts" element={<ProtectedRoute><Layout><ExpertsPage /></Layout></ProtectedRoute>} />
       <Route path="/messages" element={<ProtectedRoute><Layout><Messages /></Layout></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><Layout><Profile /></Layout></ProtectedRoute>} />
       <Route path="/notifications" element={<ProtectedRoute><Layout><Notifications /></Layout></ProtectedRoute>} />
