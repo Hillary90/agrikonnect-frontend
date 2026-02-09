@@ -3,6 +3,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import { LoginPage, RegisterPage } from './pages/auth';
+import Messages from './pages/Messages';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import FeedPage from './pages/posts/FeedPage';
 import CommunitiesPage from './pages/CommunitiesPage';
@@ -11,11 +12,10 @@ import CreateCommunity from './pages/CreateCommunity';
 import ExpertsPage from './pages/ExpertsPage';
 import ExpertProfilePage from './pages/ExpertProfilePage';
 
-// Layout component for pages with header
 const Layout = ({ children }) => (
   <>
     <Header />
-    <div className="pt-20">
+    <div className="pt-16">
       {children}
     </div>
     <Footer />
@@ -32,14 +32,13 @@ const HomeLayout = ({ children }) => (
 );
 
 // Placeholder components for routes not yet implemented
-const Messages = () => <div className="p-8">Messages Page - Coming Soon</div>;
 const Profile = () => <div className="p-8">Profile Page - Coming Soon</div>;
 const Notifications = () => <div className="p-8">Notifications Page - Coming Soon</div>;
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<HomeLayout><HomePage /></HomeLayout>} />
+      <Route path="/" element={<Layout><HomePage /></Layout>} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/posts" element={<ProtectedRoute><Layout><FeedPage /></Layout></ProtectedRoute>} />
