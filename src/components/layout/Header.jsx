@@ -44,6 +44,9 @@ const Header = () => {
             <Link to="/experts" className="text-white hover:text-secondary transition-colors font-medium">
               Experts
             </Link>
+            <Link to="/weather" className="text-white hover:text-secondary transition-colors font-medium">
+              Weather
+            </Link>
               {token && user && (
                 <Link to="/messages" className="text-white hover:text-secondary transition-colors font-medium">
                   Messages
