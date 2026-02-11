@@ -1,13 +1,16 @@
 import { Link } from 'react-router-dom';
 
-// Reusable card component displaying community information with view action
-const CommunityCard = ({ community }) => (
-  <div className="glass bg-white/40 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-1 overflow-hidden">
+// Reusable card component displaying community information with view and join actions
+const CommunityCard = ({ community, onJoin }) => (
+  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all overflow-hidden">
     <div className="p-6">
       <div className="flex justify-between items-start mb-4">
+        <div className="w-12 rounded-lg bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-2xl">
+          {community.icon}
+        </div>
         {/* Display category badge if available */}
         {community.category && (
-          <span className="px-3 py-1 bg-secondary/10 text-secondary text-xs font-semibold rounded-full">
+          <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full">
             {community.category}
           </span>
         )}
