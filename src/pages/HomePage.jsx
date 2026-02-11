@@ -47,9 +47,6 @@ const HomePage = () => {
                   <Link to="/register" className="bg-secondary text-white px-8 py-4 rounded-full font-semibold hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2">
                     Start Free Today <span>→</span>
                   </Link>
-                  <Link to="/login" className="glass-dark text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-all">
-                    Sign In
-                  </Link>
                 </div>
               )}
 
@@ -60,7 +57,7 @@ const HomePage = () => {
                   <img src="/farmer-4.jpg" alt="" className="w-12 h-12 rounded-full border-2 border-white object-cover" />
                 </div>
                 <div className="text-white">
-                  <div className="font-bold">100+ Farmers</div>
+                  <div className="font-bold">10,000+ Farmers</div>
                   <div className="text-sm text-gray-300">Growing together</div>
                 </div>
               </div>
