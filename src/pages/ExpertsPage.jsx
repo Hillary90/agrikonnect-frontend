@@ -7,13 +7,18 @@ import ExpertCard from '../components/ExpertCard';
   const ExpertsPage = () => {
   const dispatch = useAppDispatch();
   const { list: experts, loading } = useAppSelector(state => state.experts); 
-  const [search, setSearch] = useState(''); // stores search query typed by the user
-  const [location, setLocation] = useState(''); // store selected location filter
-  const [specialty, setSpecialty] = useState(''); // store selected specialty filter
+  const [search, setSearch] = useState('');
+  const [location, setLocation] = useState('');
+  const [specialty, setSpecialty] = useState('');
+  const [specialties, setSpecialties] = useState([]);
 
-  // fetch all experts on mount and only rund once
   useEffect(() => {
     dispatch(fetchExperts());
+    // Fetch specialties from backend
+    fetch(`${import.meta.env.VITE_API_URL}/experts/specialties`)
+      .then(res => res.json())
+      .then(data => setSpecialties(data.specialties || []))
+      .catch(err => console.error('Failed to fetch specialties:', err));
   }, [dispatch]);
 
   const filteredExperts = experts.filter(e => {
@@ -29,9 +34,8 @@ import ExpertCard from '../components/ExpertCard';
     dispatch(expert.is_following ? unfollowExpert(id) : followExpert(id));
   };
 
-  // extract unique locations and specialties for filter dropdowns
+  // extract unique locations for filter dropdown
   const locations = [...new Set(experts.map(e => e.location).filter(Boolean))];
-  const specialties = [...new Set(experts.flatMap(e => e.specialties || []))];
 
   if (loading) {
     return (
