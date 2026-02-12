@@ -93,8 +93,10 @@ const ExpertProfilePage = () => {
                 >
                   {expert.is_following ? 'Following' : 'Follow'}
                 </button>
-                {/* message button for sendig messages */}
-                <button className="px-6 py-3 glass bg-white text-gray-700 rounded-full font-semibold hover:bg-gray-50 transition-all flex items-center gap-2">
+                <button 
+                  onClick={() => navigate(`/messages/${id}`)} 
+                  className="px-6 py-3 glass bg-white text-gray-700 rounded-full font-semibold hover:bg-gray-200 transition-all flex items-center gap-2"
+                >
                   Message
                 </button>
               </div>
