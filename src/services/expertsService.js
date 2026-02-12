@@ -22,7 +22,7 @@ export const expertsService = {
 
   // unfollow an expert
   unfollowExpert: async (id) => {
-    const response = await api.post(`/experts/${id}/unfollow`);
+    const response = await api.delete(`/experts/${id}/follow`);
     return response.data;
   },
 
