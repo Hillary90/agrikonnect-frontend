@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { fetchExperts, followExpert, unfollowExpert } from '../features/experts/expertsSlice';
+import { fetchExperts } from '../features/experts/expertsSlice';
 import ExpertCard from '../components/ExpertCard';
 
 // expert component that displays all experts with search and filter functionality
@@ -27,12 +27,6 @@ import ExpertCard from '../components/ExpertCard';
     const matchesSpecialty = specialty ? e.specialties?.some(s => s.toLowerCase().includes(specialty.toLowerCase())) : true;
     return matchesSearch && matchesLocation && matchesSpecialty;
   });
-
-  // handles follow/unfollow for an expert when button clicks
-  const handleFollow = (id) => {
-    const expert = experts.find(e => e.id === id);
-    dispatch(expert.is_following ? unfollowExpert(id) : followExpert(id));
-  };
 
   // extract unique locations for filter dropdown
   const locations = [...new Set(experts.map(e => e.location).filter(Boolean))];
@@ -103,7 +97,7 @@ import ExpertCard from '../components/ExpertCard';
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredExperts.map((expert) => (
-            <ExpertCard key={expert.id} expert={expert} onFollow={handleFollow} />
+            <ExpertCard key={expert.id} expert={expert} />
           ))}
         </div>
       </div>
