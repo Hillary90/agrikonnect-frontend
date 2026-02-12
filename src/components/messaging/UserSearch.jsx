@@ -127,7 +127,7 @@ export default function UserSearch({ onSelectUser, onClose }) {
             </div>
           )}
 
-          {!loading && !query && (
+          {!loading && !query && results.length === 0 && (
             <div className="text-center py-12 text-gray-500">
               <svg className="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -137,7 +137,7 @@ export default function UserSearch({ onSelectUser, onClose }) {
             </div>
           )}
 
-          {!loading && results.length > 0 && (
+          {!loading && !query && results.length > 0 && (
             <div className="space-y-2">
               {results.map((user) => (
                 <div
@@ -145,12 +145,9 @@ export default function UserSearch({ onSelectUser, onClose }) {
                   onClick={() => handleSelect(user)}
                   className="flex items-center gap-4 p-4 rounded-xl hover:bg-secondary/10 cursor-pointer transition-all border border-transparent hover:border-secondary/30"
                 >
-                  {/* Avatar */}
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-lg">
                     {user.first_name?.charAt(0).toUpperCase() || "U"}
                   </div>
-
-                  {/* User Info */}
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
                       <p className="font-semibold text-text">{user.first_name} {user.last_name}</p>
@@ -168,8 +165,42 @@ export default function UserSearch({ onSelectUser, onClose }) {
                       <p className="text-sm text-gray-500 mt-0.5">{user.email}</p>
                     )}
                   </div>
+                  <svg className="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                </div>
+              ))}
+            </div>
+          )}
 
-                  {/* Action Icon */}
+          {!loading && query && results.length > 0 && (
+            <div className="space-y-2">
+              {results.map((user) => (
+                <div
+                  key={user.id}
+                  onClick={() => handleSelect(user)}
+                  className="flex items-center gap-4 p-4 rounded-xl hover:bg-secondary/10 cursor-pointer transition-all border border-transparent hover:border-secondary/30"
+                >
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-lg">
+                    {user.first_name?.charAt(0).toUpperCase() || "U"}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <p className="font-semibold text-text">{user.first_name} {user.last_name}</p>
+                      {user.role && (
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                          user.role === "expert"
+                            ? "bg-accent/20 text-accent"
+                            : "bg-secondary/20 text-secondary"
+                        }`}>
+                          {user.role}
+                        </span>
+                      )}
+                    </div>
+                    {user.email && (
+                      <p className="text-sm text-gray-500 mt-0.5">{user.email}</p>
+                    )}
+                  </div>
                   <svg className="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
