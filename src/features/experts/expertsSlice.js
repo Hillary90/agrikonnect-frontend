@@ -24,14 +24,14 @@ const expertsSlice = createSlice({
       // Follow expert
       .addCase(followExpert.fulfilled, (state, action) => {
         const index = state.list.findIndex(e => e.id === action.meta.arg);
-        if (index !== -1) state.list[index] = { ...state.list[index], is_following: true };
-        if (state.current?.id === action.meta.arg) state.current = { ...state.current, is_following: true };
+        if (index !== -1) state.list[index] = { ...state.list[index], is_following: true, followers: state.list[index].followers + 1 };
+        if (state.current?.id === action.meta.arg) state.current = { ...state.current, is_following: true, followers: state.current.followers + 1 };
       })
       // Unfollow expert
       .addCase(unfollowExpert.fulfilled, (state, action) => {
         const index = state.list.findIndex(e => e.id === action.meta.arg);
-        if (index !== -1) state.list[index] = { ...state.list[index], is_following: false };
-        if (state.current?.id === action.meta.arg) state.current = { ...state.current, is_following: false };
+        if (index !== -1) state.list[index] = { ...state.list[index], is_following: false, followers: state.list[index].followers - 1 };
+        if (state.current?.id === action.meta.arg) state.current = { ...state.current, is_following: false, followers: state.current.followers - 1 };
       });
   }
 });
