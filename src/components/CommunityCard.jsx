@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-// Reusable card component displaying community information with view and join actions
+// Reusable card component displaying community information with view action
 const CommunityCard = ({ community }) => (
   <div className="glass bg-white/40 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-1 overflow-hidden">
     <div className="p-6">
