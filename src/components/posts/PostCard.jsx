@@ -36,6 +36,11 @@ const PostCard = ({
   //get author initials for avatar
   const authorInitials = authorName
     .split(' ').map(n => n[0]).join('').toUpperCase();
+  
+  // Get author profile image
+  const authorImage = post.author?.profile_image;
+  const baseUrl = import.meta.env.VITE_API_URL.replace('/api/v1', '');
+  const fullImageUrl = authorImage && !authorImage.startsWith('http') ? `${baseUrl}${authorImage}` : authorImage;
 
   // Format creation date
   const formattedDate = created_at ? new Date(created_at).toLocaleString() : '';
@@ -44,8 +49,12 @@ const PostCard = ({
     <div className={`glass rounded-2xl shadow-lg hover:shadow-xl transition-all p-6 mb-4 ${className}`}>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
-          <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center text-lg font-bold mr-3">
-            {authorInitials}
+          <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center text-lg font-bold mr-3 overflow-hidden">
+            {fullImageUrl ? (
+              <img src={fullImageUrl} alt={authorName} className="w-full h-full object-cover" />
+            ) : (
+              authorInitials
+            )}
           </div>
           <div>
             <p className="font-semibold text-gray-900">{authorName}</p>

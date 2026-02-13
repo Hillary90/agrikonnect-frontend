@@ -28,6 +28,16 @@ const ProfilePage = () => {
     try {
       const id = userId || currentUser?.id;
       const { data } = await api.get(`/users/${id}`);
+      
+      // Convert relative image URLs to absolute
+      const baseUrl = import.meta.env.VITE_API_URL.replace('/api/v1', '');
+      if (data.profile_image && !data.profile_image.startsWith('http')) {
+        data.profile_image = `${baseUrl}${data.profile_image}`;
+      }
+      if (data.cover_image && !data.cover_image.startsWith('http')) {
+        data.cover_image = `${baseUrl}${data.cover_image}`;
+      }
+      
       setProfile(data);
       setStats({ posts: data.posts_count || 0, communities: data.communities_count || 0 });
     } catch (error) {
@@ -67,10 +77,21 @@ const ProfilePage = () => {
       const { data } = await api.post(`/users/${profile.id}/upload-photo`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
-      setProfile({ ...profile, [type === 'profile' ? 'profile_image' : 'cover_image']: data.url });
+      
+      // Construct full URL from backend response
+      const baseUrl = import.meta.env.VITE_API_URL.replace('/api/v1', '');
+      const fullUrl = data.url.startsWith('http') ? data.url : `${baseUrl}${data.url}`;
+      
+      // Update profile state immediately
+      const updatedProfile = {
+        ...profile,
+        [type === 'profile' ? 'profile_image' : 'cover_image']: fullUrl
+      };
+      setProfile(updatedProfile);
+      
     } catch (error) {
       console.error('Failed to upload photo:', error);
-      alert('Failed to upload photo');
+      alert(error.response?.data?.error || 'Failed to upload photo');
     }
   };
 

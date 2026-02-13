@@ -1,5 +1,5 @@
 // postslice.js
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 import api from "../../services/api";
 
 // Constants & Config
@@ -379,10 +379,11 @@ export const { clearPostsState, clearError, setLikeStatus } = postsSlice.actions
 export const selectAllPosts = (state) => state.posts.items;
 export const selectIsLoading = (state) => state.posts.isLoading;
 export const selectError = (state) => state.posts.errorMsg;
-export const selectPaginationInfo = (state) => ({
-  currentPage: state.posts.page,
-  totalPages: state.posts.maxPages,
-  hasMore: state.posts.hasMoreItems,
-});
+export const selectPaginationInfo = createSelector(
+  (state) => state.posts.page,
+  (state) => state.posts.maxPages,
+  (state) => state.posts.hasMoreItems,
+  (page, totalPages, hasMoreItems) => ({ currentPage: page, totalPages, hasMoreItems })
+);
 
 export default postsSlice.reducer;

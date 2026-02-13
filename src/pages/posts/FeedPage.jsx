@@ -4,7 +4,7 @@ import {
   fetchPosts,
   createPost,
   toggleLikePost,
-  submitComment,
+  addComment,
   deleteComment,
   removePost,
   selectAllPosts,
@@ -63,7 +63,7 @@ const FeedPage = () => {
   }, [dispatch]);
 
   const handleCommentSubmit = useCallback((postId, content) => {
-    dispatch(submitComment({ postId, text: content }));
+    dispatch(addComment({ postId, content }));
   }, [dispatch]);
 
   const handleCommentDelete = useCallback((postId, commentId) => {

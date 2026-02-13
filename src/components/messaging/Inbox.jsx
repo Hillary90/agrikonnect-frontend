@@ -68,6 +68,10 @@ export default function Inbox({ onSelect, activeUserId, onNewChat }) {
 
       {!loading && conversations.length > 0 && conversations.map((conv) => {
         const initials = conv.first_name?.charAt(0).toUpperCase() + (conv.last_name?.charAt(0).toUpperCase() || '');
+        const baseUrl = import.meta.env.VITE_API_URL.replace('/api/v1', '');
+        const profileImage = conv.profile_image && !conv.profile_image.startsWith('http') 
+          ? `${baseUrl}${conv.profile_image}` 
+          : conv.profile_image;
         
         return (
           <div
@@ -82,9 +86,9 @@ export default function Inbox({ onSelect, activeUserId, onNewChat }) {
             <div className="flex items-center gap-3">
               {/* Avatar */}
               <div className="relative flex-shrink-0">
-                {conv.profile_image ? (
+                {profileImage ? (
                   <img
-                    src={conv.profile_image}
+                    src={profileImage}
                     alt={conv.username}
                     className="w-12 h-12 rounded-full object-cover"
                   />
