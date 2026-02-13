@@ -52,6 +52,7 @@ const ProfilePage = () => {
       const id = userId || currentUser?.id;
       const { data } = await api.get(`/posts?author_id=${id}`);
       setPosts(data.posts || []);
+      setStats(prev => ({ ...prev, posts: (data.posts || []).length }));
     } catch (error) {
       console.error('Failed to fetch posts:', error);
     }
@@ -62,6 +63,7 @@ const ProfilePage = () => {
       const id = userId || currentUser?.id;
       const { data } = await api.get(`/users/${id}/communities`);
       setCommunitiesList(data || []);
+      setStats(prev => ({ ...prev, communities: (data || []).length }));
     } catch (error) {
       console.error('Failed to fetch communities:', error);
       setCommunitiesList([]);
