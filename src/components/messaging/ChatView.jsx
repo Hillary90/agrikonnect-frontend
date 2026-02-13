@@ -10,6 +10,7 @@ export default function ChatView({ userId }) {
   const [error, setError] = useState(null);
   const [sending, setSending] = useState(false);
   const messagesRef = useRef(null);
+  const typingTimerRef = useRef(null);
 
   const currentUserId = useSelector(state => state.auth.user?.id);
   const currentUserName = useSelector(state => state.auth.user ? `${state.auth.user.first_name} ${state.auth.user.last_name}` : null);
@@ -48,20 +49,6 @@ export default function ChatView({ userId }) {
       }
     };
 
-    // typing indicator: notify server (legacy endpoint) that we're typing
-    let typingTimer = null;
-    const notifyTyping = async () => {
-      try {
-        await fetch(`${import.meta.env.VITE_API_URL?.replace('/api/v1','') || 'http://localhost:5000'}/messages/typing`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-          body: JSON.stringify({ other_user_id: userId })
-        });
-      } catch (e) {
-        // ignore
-      }
-    };
-
     loadMessages();
 
     const interval = setInterval(loadMessages, 3000);
@@ -69,7 +56,7 @@ export default function ChatView({ userId }) {
     return () => {
       isMounted = false;
       clearInterval(interval);
-      if (typingTimer) clearTimeout(typingTimer);
+      if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
     };
   }, [userId, currentUserId, currentUserName]);
 
@@ -102,8 +89,8 @@ export default function ChatView({ userId }) {
     // typing indicator
     if (e.key && e.key.length === 1) {
       // Debounce typing notification
-      if (typingTimer) clearTimeout(typingTimer);
-      typingTimer = setTimeout(() => {
+      if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+      typingTimerRef.current = setTimeout(() => {
         fetch(`${import.meta.env.VITE_API_URL?.replace('/api/v1','') || 'http://localhost:5000'}/messages/typing`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
