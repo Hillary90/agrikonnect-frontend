@@ -71,8 +71,14 @@ export default function ChatView({ userId }) {
       // Reload messages after sending
       const data = await fetchConversation(userId);
       setMessages(data);
-      // mark messages read via legacy endpoint
-      try { await fetch(`${import.meta.env.VITE_API_URL?.replace('/api/v1','') || 'http://localhost:5000'}/messages/mark-read`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }, body: JSON.stringify({ other_user_id: userId }) }); } catch(e) {}
+      // mark messages read
+      try { 
+        await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1'}/messages/mark-read`, { 
+          method: 'POST', 
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }, 
+          body: JSON.stringify({ other_user_id: userId }) 
+        }); 
+      } catch(e) {}
     } catch (err) {
       setError('Failed to send message');
       console.error(err);
@@ -91,7 +97,7 @@ export default function ChatView({ userId }) {
       // Debounce typing notification
       if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
       typingTimerRef.current = setTimeout(() => {
-        fetch(`${import.meta.env.VITE_API_URL?.replace('/api/v1','') || 'http://localhost:5000'}/messages/typing`, {
+        fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1'}/messages/typing`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
           body: JSON.stringify({ other_user_id: userId })
