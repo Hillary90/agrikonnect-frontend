@@ -10,7 +10,13 @@ export default function Inbox({ onSelect, activeUserId, onNewChat }) {
     const loadInbox = async () => {
       try {
         const data = await fetchInbox();
-        setConversations(data || []);
+        // merge with existing conversations to persist ordering
+        setConversations((prev) => {
+          const map = new Map();
+          (prev || []).forEach(p => map.set(p.user_id, p));
+          (data || []).forEach(d => map.set(d.user_id, d));
+          return Array.from(map.values()).sort((a,b) => new Date(b.last_message_time) - new Date(a.last_message_time));
+        });
         setError(null);
       } catch (err) {
         console.error('Inbox error:', err);

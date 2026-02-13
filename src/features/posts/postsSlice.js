@@ -200,7 +200,6 @@ export const createPost = createAsyncThunk(
 
         return standardizePost(tempPost, user);
       }
-
       return rejectWithValue(err.response?.data?.message || "Failed to create post");
     }
   }
@@ -223,14 +222,16 @@ export const toggleLikePost = createAsyncThunk(
   }
 );
 
-export const submitComment = createAsyncThunk(
+export const addComment = createAsyncThunk(
   "posts/addComment",
-  async ({ postId, text }, { rejectWithValue }) => {
+  async ({ postId, content }, { rejectWithValue }) => {
     try {
-      const response = await api.post(`/posts/${postId}/comments`, { content: text });
-      return { postId, comment: response.data };
+      const response = await api.post(`/posts/${postId}/comments`, { content });
+      // API may return { message, comment } — normalize
+      const comment = response.data?.comment || response.data;
+      return { postId, comment };
     } catch (err) {
-      return rejectWithValue("Comment failed");
+      return rejectWithValue(err.response?.data?.message || "Failed to add comment");
     }
   }
 );
@@ -300,8 +301,13 @@ const postsSlice = createSlice({
         state.isLoading = false;
         const { posts, page, totalPages } = action.payload;
 
-        // Replace if page 1, otherwise append
-        state.items = page === 1 ? posts : [...state.items, ...posts];
+        // Replace if page 1, otherwise append deduplicated
+        if (page === 1) {
+          state.items = posts;
+        } else {
+          const newPosts = posts.filter((p) => !state.items.some((existing) => String(existing.id) === String(p.id)));
+          state.items = [...state.items, ...newPosts];
+        }
         state.page = page;
         state.maxPages = totalPages;
         state.hasMoreItems = page < totalPages;
@@ -313,7 +319,12 @@ const postsSlice = createSlice({
 
       // Create Post
       .addCase(createPost.fulfilled, (state, action) => {
-        state.items.unshift(action.payload);
+        // ensure items exists
+        if (!Array.isArray(state.items)) state.items = [];
+        const exists = state.items.some((p) => String(p.id) === String(action.payload.id));
+        if (!exists) {
+          state.items.unshift(action.payload);
+        }
       })
       
       // Toggle Like
@@ -328,7 +339,7 @@ const postsSlice = createSlice({
       })
 
       // Add Comment
-      .addCase(submitComment.fulfilled, (state, action) => {
+      .addCase(addComment.fulfilled, (state, action) => {
         const { postId, comment } = action.payload;
         const post = state.items.find((p) => p.id === postId);
         if (post) {

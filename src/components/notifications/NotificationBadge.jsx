@@ -16,12 +16,13 @@ const NotificationBadge = ({ userId }) => {
         const count = await notificationService.getUnreadCount();
         setUnreadCount(count);
       } catch (error) {
-        console.error('Failed to fetch unread count:', error);
+        // Silently fail - notification service may not be running
+        console.log('Notification service unavailable');
       }
     };
 
     fetchUnreadCount();
-    const interval = setInterval(fetchUnreadCount, 30000);
+    const interval = setInterval(fetchUnreadCount, 5000); // Poll every 5 seconds
 
     return () => clearInterval(interval);
   }, [userId]);
