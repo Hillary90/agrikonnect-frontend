@@ -41,6 +41,7 @@ const PostComposer = ({
     try {
       if (onSubmit) {
         await onSubmit({
+          title: text.trim().substring(0, 100) || 'Post',
           content: text.trim(),
           imageFile: selectedImage
         });
