@@ -111,7 +111,7 @@ const FeedPage = () => {
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0 bg-cover bg-center" style={{
-        backgroundImage: "url('/farm-1.avif')",
+        backgroundImage: "url('/farm-2.avif')",
         filter: 'brightness(0.45) contrast(1.05)'
       }} />
       <div className="absolute inset-0 opacity-40" style={{
