@@ -46,7 +46,7 @@ export default function ProductDetailPage() {
           <div className="grid md:grid-cols-2 gap-8 p-8">
             <div>
               {product.image_url ? (
-                <img src={`${import.meta.env.VITE_API_URL.replace('/api/v1', '')}${product.image_url}`} alt={product.name} className="w-full rounded-2xl" />
+                <img src={product.image_url} alt={product.name} className="w-full rounded-2xl" />
               ) : (
                 <div className="w-full h-96 bg-gray-200 rounded-2xl flex items-center justify-center"><span className="text-gray-400">No image</span></div>
               )}
