@@ -48,11 +48,19 @@ const Header = () => {
             <Link to="/weather" className="text-white hover:text-secondary transition-colors font-medium">
               Weather
             </Link>
-              {token && user && (
+            <Link to="/marketplace" className="text-white hover:text-secondary transition-colors font-medium">
+              Marketplace
+            </Link>
+            {token && user && (
+              <>
                 <Link to="/messages" className="text-white hover:text-secondary transition-colors font-medium">
                   Messages
                 </Link>
-              )}
+                <Link to="/marketplace/my-orders" className="text-white hover:text-secondary transition-colors font-medium">
+                  My Orders
+                </Link>
+              </>
+            )}
           </nav>
 
           <div className="hidden md:flex items-center gap-4">
@@ -127,14 +135,37 @@ const Header = () => {
               >
                 Experts
               </Link>
+              <Link 
+                to="/weather" 
+                className="text-white hover:text-secondary hover:bg-white/10 px-4 py-2 rounded-md transition-colors"
+                onClick={() => setMobileOpen(false)}
+              >
+                Weather
+              </Link>
+              <Link 
+                to="/marketplace" 
+                className="text-white hover:text-secondary hover:bg-white/10 px-4 py-2 rounded-md transition-colors"
+                onClick={() => setMobileOpen(false)}
+              >
+                Marketplace
+              </Link>
               {token && user && (
-                <Link 
-                  to="/messages" 
-                  className="text-white hover:text-secondary hover:bg-white/10 px-4 py-2 rounded-md transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Messages
-                </Link>
+                <>
+                  <Link 
+                    to="/messages" 
+                    className="text-white hover:text-secondary hover:bg-white/10 px-4 py-2 rounded-md transition-colors"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Messages
+                  </Link>
+                  <Link 
+                    to="/marketplace/my-orders" 
+                    className="text-white hover:text-secondary hover:bg-white/10 px-4 py-2 rounded-md transition-colors"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    My Orders
+                  </Link>
+                </>
               )}
               
               <div className="pt-4 border-t border-white/20 space-y-2">
@@ -175,15 +206,6 @@ const Header = () => {
                     </Link>
                   </>
                 )}
-                  {token && user && (
-                    <Link 
-                      to="/messages" 
-                      className="text-white hover:text-secondary hover:bg-white/10 px-4 py-2 rounded-md transition-colors"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      Messages
-                    </Link>
-                  )}
               </div>
             </nav>
           </div>

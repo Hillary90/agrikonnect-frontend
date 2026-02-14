@@ -5,6 +5,7 @@ import authReducer from '../features/auth/authSlice';
 import postsReducer from '../features/posts/postsSlice';
 import communitiesReducer from '../features/communities/communitiesSlice';
 import expertsReducer from '../features/experts/expertsSlice';
+import marketplaceReducer from '../features/marketplace/marketplaceSlice';
 
 // Combine reducers for different features
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   posts: postsReducer,
   communities: communitiesReducer,
   experts: expertsReducer,
+  marketplace: marketplaceReducer,
 });
 
 const createNoopStorage = () => ({

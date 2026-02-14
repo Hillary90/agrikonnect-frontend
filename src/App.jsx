@@ -13,6 +13,10 @@ import CreateCommunity from './pages/CreateCommunity';
 import ExpertProfilePage from './pages/ExpertProfilePage';
 import WeatherPage from './pages/WeatherPage';
 import ProfilePage from './pages/ProfilePage';
+import MarketplacePage from './pages/MarketplacePage';
+import ProductDetailPage from './pages/ProductDetailPage';
+import SellProductPage from './pages/SellProductPage';
+import MyOrdersPage from './pages/MyOrdersPage';
 
 const Layout = ({ children }) => (
   <>
@@ -61,6 +65,10 @@ function App() {
       <Route path="/messages" element={<ProtectedRoute><MessageLayout><Messages /></MessageLayout></ProtectedRoute>} />
       <Route path="/messages/:id" element={<ProtectedRoute><MessageLayout><Messages /></MessageLayout></ProtectedRoute>} />
       <Route path="/weather" element={<Layout><WeatherPage /></Layout>} />
+      <Route path="/marketplace" element={<Layout><MarketplacePage /></Layout>} />
+      <Route path="/marketplace/sell" element={<ProtectedRoute><Layout><SellProductPage /></Layout></ProtectedRoute>} />
+      <Route path="/marketplace/products/:id" element={<ProtectedRoute><Layout><ProductDetailPage /></Layout></ProtectedRoute>} />
+      <Route path="/marketplace/my-orders" element={<ProtectedRoute><Layout><MyOrdersPage /></Layout></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><Layout><ProfilePage /></Layout></ProtectedRoute>} />
       <Route path="/profile/:userId" element={<ProtectedRoute><Layout><ProfilePage /></Layout></ProtectedRoute>} />
       <Route path="/notifications" element={<ProtectedRoute><Layout><Notifications /></Layout></ProtectedRoute>} />
