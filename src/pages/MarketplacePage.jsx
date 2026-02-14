@@ -65,7 +65,7 @@ export default function MarketplacePage() {
               <Link to={`/marketplace/products/${product.id}`}>
                 <div className="relative">
                   {product.image_url ? (
-                    <img src={`${import.meta.env.VITE_API_URL.replace('/api/v1', '')}${product.image_url}`} alt={product.name} className="w-full h-48 object-cover" />
+                    <img src={product.image_url} alt={product.name} className="w-full h-48 object-cover" />
                   ) : (
                     <div className="w-full h-48 bg-gray-200 flex items-center justify-center"><span className="text-gray-400">No image</span></div>
                   )}

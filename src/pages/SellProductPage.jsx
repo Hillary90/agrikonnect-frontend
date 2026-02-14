@@ -89,7 +89,7 @@ export default function SellProductPage() {
               {uploading ? 'Uploading...' : 'Choose Image'}
               <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={uploading} />
             </label>
-            {formData.image_url && <img src={`${import.meta.env.VITE_API_URL.replace('/api/v1', '')}${formData.image_url}`} alt="Preview" className="mt-4 h-40 w-full object-cover rounded-2xl" />}
+            {formData.image_url && <img src={formData.image_url} alt="Preview" className="mt-4 h-40 w-full object-cover rounded-2xl" />}
           </div>
           
           <button type="submit" disabled={loading} className="w-full bg-secondary text-white py-3 rounded-full font-semibold hover:bg-secondary/90 transition-all shadow-lg disabled:bg-gray-400">
