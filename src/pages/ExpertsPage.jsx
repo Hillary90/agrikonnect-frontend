@@ -25,7 +25,8 @@ import ExpertCard from '../components/ExpertCard';
   const filteredExperts = experts.filter(e => {
     const matchesSearch = search ? (e.name.toLowerCase().includes(search.toLowerCase()) || e.title?.toLowerCase().includes(search.toLowerCase())) : true;
     const matchesLocation = location ? e.location?.toLowerCase().includes(location.toLowerCase()) : true;
-    const matchesSpecialty = specialty ? e.specialties?.some(s => s.toLowerCase().includes(specialty.toLowerCase())) : true;
+    const matchesSpecialty = specialty ? (e.specialties?.some(s => s.toLowerCase().includes(specialty.toLowerCase())) || false) : true;
+    console.log('Filter:', { expert: e.name, search: matchesSearch, location: matchesLocation, specialty: matchesSpecialty, selectedSpecialty: specialty });
     return matchesSearch && matchesLocation && matchesSpecialty;
   });
 
