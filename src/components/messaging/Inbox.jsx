@@ -10,11 +10,15 @@ export default function Inbox({ onSelect, activeUserId, onNewChat }) {
     const loadInbox = async () => {
       try {
         const data = await fetchInbox();
+        console.log('Inbox data received:', data);
         // merge with existing conversations to persist ordering
         setConversations((prev) => {
           const map = new Map();
           (prev || []).forEach(p => map.set(p.user_id, p));
-          (data || []).forEach(d => map.set(d.user_id, d));
+          (data || []).forEach(d => {
+            console.log('Conversation:', d);
+            map.set(d.user_id, d);
+          });
           return Array.from(map.values()).sort((a,b) => new Date(b.last_message_time) - new Date(a.last_message_time));
         });
         setError(null);
@@ -68,6 +72,7 @@ export default function Inbox({ onSelect, activeUserId, onNewChat }) {
 
       {!loading && conversations.length > 0 && conversations.map((conv) => {
         const initials = conv.first_name?.charAt(0).toUpperCase() + (conv.last_name?.charAt(0).toUpperCase() || '');
+        const displayName = conv.username || `${conv.first_name || ''} ${conv.last_name || ''}`.trim() || 'Unknown User';
         const baseUrl = import.meta.env.VITE_API_URL.replace('/api/v1', '');
         const profileImage = conv.profile_image && !conv.profile_image.startsWith('http') 
           ? `${baseUrl}${conv.profile_image}` 
@@ -76,7 +81,7 @@ export default function Inbox({ onSelect, activeUserId, onNewChat }) {
         return (
           <div
             key={conv.user_id}
-            onClick={() => onSelect(conv.user_id, conv.username)}
+            onClick={() => onSelect(conv.user_id, displayName)}
             className={`p-4 border-b border-white/10 cursor-pointer transition-all duration-200 ${
               activeUserId === conv.user_id
                 ? 'bg-secondary/20 border-l-4 border-l-secondary'
@@ -104,7 +109,7 @@ export default function Inbox({ onSelect, activeUserId, onNewChat }) {
               {/* User Info */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <p className="font-medium text-text truncate">{conv.username}</p>
+                  <p className="font-medium text-text truncate">{displayName}</p>
                   {conv.role && (
                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium flex-shrink-0 ${
                       conv.role === 'expert'
