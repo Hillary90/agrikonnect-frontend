@@ -19,7 +19,8 @@ export default function SellProductPage() {
     formDataImg.append('file', file);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:5000/api/marketplace/upload-image', formDataImg, 
+      const BASE_URL = import.meta.env.VITE_API_URL?.replace('/api/v1', '') || 'http://localhost:5000';
+      const response = await axios.post(`${BASE_URL}/api/marketplace/upload-image`, formDataImg, 
         { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } });
       setFormData({...formData, image_url: response.data.image_url});
     } catch {
