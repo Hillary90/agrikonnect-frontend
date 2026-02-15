@@ -34,7 +34,7 @@ export default function Inbox({ onSelect, activeUserId, onNewChat }) {
   }, []);
 
   return (
-    <div className="w-1/3 border-r border-white/20 h-full overflow-y-auto bg-gradient-to-b from-primary/5 to-transparent">
+    <div className="w-full md:w-80 lg:w-96 border-r border-white/20 h-full overflow-y-auto bg-gradient-to-b from-primary/5 to-transparent">
       <div className="p-4 border-b border-white/20 sticky top-0 bg-primary/10 backdrop-blur-sm">
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-lg text-text">Messages</h2>

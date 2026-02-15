@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { fetchConversation, sendMessage } from "../../services/messagesApi";
 import MessageBubble from "./MessageBubble";
 
-export default function ChatView({ userId }) {
+export default function ChatView({ userId, onBack }) {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
@@ -120,18 +120,29 @@ export default function ChatView({ userId }) {
   }
 
   return (
-    <div className="flex-1 flex flex-col bg-gradient-to-br from-slate-100 via-blue-50 to-slate-100 relative" style={{height: 'calc(100vh - 64px)'}}>
+    <div className="flex-1 flex flex-col bg-gradient-to-br from-slate-100 via-blue-50 to-slate-100 relative h-screen md:h-auto">
       <div className="absolute inset-0 opacity-30" style={{
         backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.2) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.2) 0%, transparent 50%)'
       }} />
       <div className="relative z-10 flex flex-col h-full">
+      {/* Mobile back button */}
+      {onBack && (
+        <div className="md:hidden p-4 border-b border-white/30 bg-white/60 backdrop-blur-md">
+          <button onClick={onBack} className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            <span className="font-medium">Back to conversations</span>
+          </button>
+        </div>
+      )}
       {error && (
         <div className="p-4 m-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
           {error}
         </div>
       )}
 
-      <div ref={messagesRef} className="flex-1 p-6 overflow-y-auto space-y-4">
+      <div ref={messagesRef} className="flex-1 p-4 md:p-6 overflow-y-auto space-y-4">
         {loading ? (
           <div className="flex items-center justify-center h-full">
             <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full"></div>
@@ -152,20 +163,20 @@ export default function ChatView({ userId }) {
         )}
       </div>
 
-      <div className="p-6 border-t border-white/30 bg-white/60 backdrop-blur-md shadow-lg relative z-20">
-        <div className="flex gap-3">
+      <div className="p-4 md:p-6 border-t border-white/30 bg-white/60 backdrop-blur-md shadow-lg relative z-20">
+        <div className="flex gap-2 md:gap-3">
           <input
             value={text}
             onChange={(e) => setText(e.target.value)}
             onKeyPress={handleKeyPress}
             disabled={sending}
-            className="flex-1 border border-gray-300 rounded-full px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-white transition-all shadow-sm"
+            className="flex-1 border border-gray-300 rounded-full px-3 md:px-4 py-2 md:py-3 text-sm md:text-base focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-white transition-all shadow-sm"
             placeholder="Type your message..."
           />
           <button
             onClick={handleSend}
             disabled={sending || !text.trim()}
-            className="bg-gradient-to-r from-blue-500 to-emerald-600 text-white px-6 py-3 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg"
+            className="bg-gradient-to-r from-blue-500 to-emerald-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-semibold text-sm md:text-base disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg"
           >
             {sending ? 'Sending...' : 'Send'}
           </button>
