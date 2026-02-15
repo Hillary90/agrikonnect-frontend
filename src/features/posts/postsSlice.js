@@ -88,6 +88,8 @@ const standardizePost = (rawPost, currentUser) => {
     isLiked: !!(rawPost.isLiked || rawPost.is_liked || rawPost.user_liked),
     // Handle different API field names for comments
     commentCount: rawPost.commentCount || rawPost.comments_count || rawPost.comments?.length || 0,
+    // Preserve comments array from backend
+    comments: rawPost.comments || [],
   };
 };
 
