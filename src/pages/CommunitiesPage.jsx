@@ -53,18 +53,18 @@ const CommunitiesPage = () => {
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/farm_page.jpg)' }} />
       <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-white/10" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <div className="flex justify-between items-center gap-4">
+        <div className="mb-8 md:mb-12">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">Communities</h1>
-              <p className="text-xl text-gray-600">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 md:mb-3">Communities</h1>
+              <p className="text-base md:text-xl text-gray-600">
                 Join specialized communities to connect with experts and fellow farmers.
               </p>
             </div>
             {canCreateCommunity && (
               <button 
                 onClick={() => navigate('/communities/create')} 
-                className="bg-secondary text-white px-6 py-3 rounded-full font-semibold hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="bg-secondary text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-semibold hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 whitespace-nowrap text-sm md:text-base"
               >
                 + Create Community
               </button>
@@ -82,22 +82,22 @@ const CommunitiesPage = () => {
           />
         </div>
         
-        <div className="flex gap-4 mb-8">
+        <div className="flex flex-wrap gap-3 md:gap-4 mb-6 md:mb-8">
           <button 
             onClick={() => setActiveTab('all')} 
-            className={`px-6 py-3 rounded-full font-semibold transition-all ${activeTab === 'all' ? 'bg-secondary text-white shadow-lg' : 'glass bg-white/40 text-gray-700 hover:bg-gray-50'}`}
+            className={`px-4 md:px-6 py-2 md:py-3 rounded-full font-semibold transition-all text-sm md:text-base ${activeTab === 'all' ? 'bg-secondary text-white shadow-lg' : 'glass bg-white/40 text-gray-700 hover:bg-gray-50'}`}
           >
             All Communities
           </button>
           <button 
             onClick={() => setActiveTab('my')} 
-            className={`px-6 py-3 rounded-full font-semibold transition-all ${activeTab === 'my' ? 'bg-secondary text-white shadow-lg' : 'glass bg-white/40 text-gray-700 hover:bg-gray-50'}`}
+            className={`px-4 md:px-6 py-2 md:py-3 rounded-full font-semibold transition-all text-sm md:text-base ${activeTab === 'my' ? 'bg-secondary text-white shadow-lg' : 'glass bg-white/40 text-gray-700 hover:bg-gray-50'}`}
           >
             My Communities
           </button>
           <button 
             onClick={() => setActiveTab('recommended')} 
-            className={`px-6 py-3 rounded-full font-semibold transition-all ${activeTab === 'recommended' ? 'bg-secondary text-white shadow-lg' : 'glass bg-white/40 text-gray-700 hover:bg-gray-50'}`}
+            className={`px-4 md:px-6 py-2 md:py-3 rounded-full font-semibold transition-all text-sm md:text-base ${activeTab === 'recommended' ? 'bg-secondary text-white shadow-lg' : 'glass bg-white/40 text-gray-700 hover:bg-gray-50'}`}
           >
             Recommended
           </button>
