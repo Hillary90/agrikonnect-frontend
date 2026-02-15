@@ -109,38 +109,35 @@ const CommunityDetails = () => {
         </button>
 
         {/* header with community name and action buttons */}
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
             {community.name}
           </h1>
           
-          <div className="flex gap-3">
-            {/* join/leave button */}
+          <div className="flex flex-wrap gap-2 md:gap-3">
             <button 
               onClick={handleJoin} 
-              className="px-6 py-3 rounded-full font-semibold bg-secondary text-white hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="px-4 md:px-6 py-2 md:py-3 rounded-full font-semibold bg-secondary text-white hover:bg-secondary/90 transition-all shadow-lg text-sm md:text-base"
             >
               {community.is_member ? 'Leave' : 'Join'}
             </button>
-            {/* toggle chat visibility */}
             <button 
               onClick={() => setShowChat(!showChat)} 
-              className="px-6 py-3 rounded-full font-semibold glass bg-white text-gray-700 hover:bg-gray-50 transition-all"
+              className="px-4 md:px-6 py-2 md:py-3 rounded-full font-semibold glass bg-white text-gray-700 hover:bg-gray-50 transition-all text-sm md:text-base"
             >
               {showChat ? 'Hide Chat' : 'Show Chat'}
             </button>
-            {/* Admin controls - only visible to creator */}
             {isAdmin && (editing ? (
               <>
                 <button 
                   onClick={handleSave} 
-                  className="bg-secondary text-white px-6 py-3 rounded-full font-semibold hover:bg-secondary/90 transition-all shadow-lg"
+                  className="bg-secondary text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-semibold hover:bg-secondary/90 transition-all shadow-lg text-sm md:text-base"
                 >
                   Save
                 </button>
                 <button 
                   onClick={() => setEditing(false)} 
-                  className="px-6 py-3 rounded-full font-semibold glass bg-white text-gray-700 hover:bg-gray-50 transition-all"
+                  className="px-4 md:px-6 py-2 md:py-3 rounded-full font-semibold glass bg-white text-gray-700 hover:bg-gray-50 transition-all text-sm md:text-base"
                 >
                   Cancel
                 </button>
@@ -149,13 +146,13 @@ const CommunityDetails = () => {
               <>
                 <button 
                   onClick={() => setEditing(true)} 
-                  className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary/90 transition-all shadow-lg"
+                  className="bg-primary text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-semibold hover:bg-primary/90 transition-all shadow-lg text-sm md:text-base"
                 >
                   Edit
                 </button>
                 <button 
                   onClick={handleDelete} 
-                  className="bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition-all shadow-lg"
+                  className="bg-red-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-semibold hover:bg-red-700 transition-all shadow-lg text-sm md:text-base"
                 >
                   Delete
                 </button>
