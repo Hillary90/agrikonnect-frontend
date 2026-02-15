@@ -19,13 +19,24 @@ export default function Messages() {
   };
 
   return (
-    <div className="h-screen flex bg-background">
-      <Inbox 
-        onSelect={handleInboxSelect} 
-        activeUserId={activeUser}
-        onNewChat={() => setShowSearch(true)}
-      />
-      <ChatView userId={activeUser} userName={activeUserName} />
+    <div className="h-screen flex flex-col md:flex-row bg-background">
+      {/* Show inbox on mobile only when no active chat */}
+      <div className={`${activeUser ? 'hidden md:flex' : 'flex'} md:flex`}>
+        <Inbox 
+          onSelect={handleInboxSelect} 
+          activeUserId={activeUser}
+          onNewChat={() => setShowSearch(true)}
+        />
+      </div>
+      
+      {/* Show chat on mobile only when chat is active */}
+      <div className={`${activeUser ? 'flex' : 'hidden md:flex'} flex-1`}>
+        <ChatView 
+          userId={activeUser} 
+          userName={activeUserName}
+          onBack={() => setActiveUser(null)}
+        />
+      </div>
       
       {showSearch && (
         <UserSearch
