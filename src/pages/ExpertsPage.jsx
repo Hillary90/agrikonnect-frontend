@@ -62,8 +62,8 @@ import ExpertCard from '../components/ExpertCard';
           </p>
         </div>
         
-        <div className="glass bg-white/40 backdrop-blur-sm rounded-3xl shadow-lg p-6 mb-8">
-          <div className="grid md:grid-cols-4 gap-4">
+        <div className="glass bg-white/40 backdrop-blur-sm rounded-3xl shadow-lg p-4 md:p-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4">
             <input 
               type="text" 
               placeholder="Search experts..." 
