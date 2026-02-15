@@ -34,11 +34,11 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-bold text-white uppercase mb-6 pb-2 border-b-2 border-secondary">Quick Links</h4>
             <ul className="space-y-3">
-              <li><Link to="/" className="text-gray-300 hover:text-secondary transition-colors">About Us</Link></li>
-              <li><Link to="/" className="text-gray-300 hover:text-secondary transition-colors">Blog & News</Link></li>
+              <li><Link to="/about" className="text-gray-300 hover:text-secondary transition-colors">About Us</Link></li>
+              <li><Link to="/blog" className="text-gray-300 hover:text-secondary transition-colors">Blog & News</Link></li>
               <li><Link to="/communities" className="text-gray-300 hover:text-secondary transition-colors">Communities</Link></li>
               <li><Link to="/experts" className="text-gray-300 hover:text-secondary transition-colors">Find Experts</Link></li>
-              <li><Link to="/" className="text-gray-300 hover:text-secondary transition-colors">Contact Us</Link></li>
+              <li><Link to="/contact" className="text-gray-300 hover:text-secondary transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
@@ -46,10 +46,10 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-bold text-white uppercase mb-6 pb-2 border-b-2 border-secondary">Resources</h4>
             <ul className="space-y-3">
-              <li><Link to="/" className="text-gray-300 hover:text-secondary transition-colors">Help Center</Link></li>
-              <li><Link to="/" className="text-gray-300 hover:text-secondary transition-colors">FAQs</Link></li>
-              <li><Link to="/" className="text-gray-300 hover:text-secondary transition-colors">Terms & Conditions</Link></li>
-              <li><Link to="/" className="text-gray-300 hover:text-secondary transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/help" className="text-gray-300 hover:text-secondary transition-colors">Help Center</Link></li>
+              <li><Link to="/faq" className="text-gray-300 hover:text-secondary transition-colors">FAQs</Link></li>
+              <li><Link to="/terms" className="text-gray-300 hover:text-secondary transition-colors">Terms & Conditions</Link></li>
+              <li><Link to="/privacy" className="text-gray-300 hover:text-secondary transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
 
