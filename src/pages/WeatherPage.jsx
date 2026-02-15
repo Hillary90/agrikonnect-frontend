@@ -86,7 +86,7 @@ const WeatherPage = () => {
           <p className="text-xl capitalize">{weather.weather[0].description}</p>
           
           {/* a simple weather deatils to shows humidity, wind, pressure, visibility */}
-          <div className="grid grid-cols-4 gap-4 mt-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
             <div className="text-center p-4 ">
               <p className="text-sm text-gray-600">Humidity</p>
               <p className="text-2xl font-bold">{weather.main.humidity}%</p>
