@@ -17,6 +17,13 @@ import MarketplacePage from './pages/MarketplacePage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import SellProductPage from './pages/SellProductPage';
 import MyOrdersPage from './pages/MyOrdersPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import FAQPage from './pages/FAQPage';
+import PrivacyPage from './pages/PrivacyPage';
+import TermsPage from './pages/TermsPage';
+import HelpPage from './pages/HelpPage';
+import BlogPage from './pages/BlogPage';
 
 const Layout = ({ children }) => (
   <>
@@ -72,6 +79,13 @@ function App() {
       <Route path="/profile" element={<ProtectedRoute><Layout><ProfilePage /></Layout></ProtectedRoute>} />
       <Route path="/profile/:userId" element={<ProtectedRoute><Layout><ProfilePage /></Layout></ProtectedRoute>} />
       <Route path="/notifications" element={<ProtectedRoute><Layout><Notifications /></Layout></ProtectedRoute>} />
+      <Route path="/about" element={<Layout><AboutPage /></Layout>} />
+      <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
+      <Route path="/faq" element={<Layout><FAQPage /></Layout>} />
+      <Route path="/privacy" element={<Layout><PrivacyPage /></Layout>} />
+      <Route path="/terms" element={<Layout><TermsPage /></Layout>} />
+      <Route path="/help" element={<Layout><HelpPage /></Layout>} />
+      <Route path="/blog" element={<Layout><BlogPage /></Layout>} />
     </Routes>
   );
 }
