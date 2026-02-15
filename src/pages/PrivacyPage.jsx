@@ -5,7 +5,7 @@ export default function PrivacyPage() {
       <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-white/10" />
       <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-6 py-8 md:py-12">
         <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 md:mb-6">Privacy Policy</h1>
-        <p className="text-sm md:text-base text-gray-600 mb-6 md:mb-8">Last updated: January 2024</p>
+        <p className="text-sm md:text-base text-gray-600 mb-6 md:mb-8">Last updated: February 2026</p>
         
         <div className="glass bg-white/40 rounded-3xl shadow-lg p-6 md:p-8 space-y-6">
           <section>
