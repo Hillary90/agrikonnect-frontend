@@ -40,7 +40,7 @@ export default function AboutPage() {
           <section>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Our Story</h2>
             <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-              Founded in 2024, Agrikonnect was born from the vision of bridging the gap between traditional farming 
+              Founded in 2026, Agrikonnect was born from the vision of bridging the gap between traditional farming 
               practices and modern agricultural technology. We believe that every farmer deserves access to expert 
               knowledge and a supportive community to help them succeed.
             </p>
