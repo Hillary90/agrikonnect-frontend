@@ -3,6 +3,7 @@
   "short_name": "Agrikonnect",
   "description": "Empowering farmers with knowledge, connecting communities, and cultivating success together",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#22c55e",
